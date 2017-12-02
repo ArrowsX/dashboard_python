@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8" />
+   <title>Chart.js </title>
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+ 
+</head>
+
+<body>
+  <canvas id="myChart" width="400" height="200"></canvas>
+  <script>
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [{% for item in labels %} "{{ item }}", {% endfor %}],
+        datasets: [{
+          label: '# of Votes',
+          data: [{% for item in values %} {{ item }}, {% endfor %}],
+          backgroundColor: [{% for item in background_color %} "{{ item }}", {% endfor %}],
+          borderColor: [{% for item in border_color %} "{{ item }}", {% endfor %}],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero:true
+            }
+          }]
+        }
+      }
+    });
+  </script>
+</body>
+</html>
